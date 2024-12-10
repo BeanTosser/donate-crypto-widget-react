@@ -1,19 +1,35 @@
 {
   "name": "donate-crypto-widget-react",
-  "version": "0.1.0",
-  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/beantosser/donate-crypto-widget-react"
+  },
+  "version": "1.0.66",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "babel-preset-react-app": "^10.0.1",
+    "qrcode-generator": "^1.4.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.26.3" 
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel ./lib --copy-files --out-dir dist --ignore __tests__,spec.js,test.js,__snapshots__ --extensions '.ts,.tsx'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
