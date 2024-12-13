@@ -53,9 +53,6 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
     let [isShiftingLeft, setIsShiftingLeft] = useState<boolean>(false);
     let [qrImageSources, setQrImageSources] = useState<string[]>([] as string[]);
     let [coinImageSources, setCoinImageSources] = useState<string[]>([] as string[]);
-
-    console.log("Spanky: currentCoinShift: " + currentCoinShift);
-
     let testVar: string = "it might not work.";
 
     // The following function obtained (and modified) from:
@@ -69,16 +66,9 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
             
             We declare two elements are equal here if they are === or both NaN.
             See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#comparing_equality_methods
-        */
-        console.log("oldarray: : " + JSON.stringify(oldArray));
-        console.log("newArray: " + JSON.stringify(newArray));
-        const difArray = oldArray.filter(function(ticker) {
-            let test = !newArray.includes(ticker);
-            console.log("Is " + ticker + " a missing element? " + (test ? "yes!" : "No!"));
-            return !newArray.includes(ticker);
-        })
-        console.log("difArray: " + JSON.stringify(difArray));
-        return oldArray.indexOf(difArray[0]);
+        */        const difArray = oldArray.filter(function(ticker) {
+            let test = !newArray.includes(ticker);            return !newArray.includes(ticker);
+        })        return oldArray.indexOf(difArray[0]);
 
     }
 
@@ -90,9 +80,7 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
 
             if (e > -1){
                 if(e>0 && currentCoinIndex === e){
-                    setcurrentCoinIndex(oldCoinIndex => (oldCoinIndex - 1) | 0);
-                    console.log("Shabam! Fixing currentCoinIndex to be " + (currentCoinIndex - 1).toString());
-                    resetImageSources();
+                    setcurrentCoinIndex(oldCoinIndex => (oldCoinIndex - 1) | 0);                    resetImageSources();
                     coin1ImageURL.current = tempCoinImageSources[currentCoinIndex - 1];
                     coin2ImageURL.current = tempCoinImageSources[currentCoinIndex - 1];
                     oldTickersList.current = props.tickers;
@@ -102,13 +90,8 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
                     coin1ImageURL.current = tempCoinImageSources[0];
                     coin2ImageURL.current = tempCoinImageSources[0];
                 }
-                console.log("Shabam! The first element was removed from the array.");
-
             }
-        }
-
-        console.log("Shabam! It didn't work :(");
-        oldTickersList.current = props.tickers;
+        }        oldTickersList.current = props.tickers;
         resetImageSources();
         
 
@@ -129,12 +112,8 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
                     imageSourceIndex++;
                 } else {
                     tempCoinImageSources.push(EMPTY_COIN_IMAGE);
-                }
-                console.log("The coin is NOT supported");
-            } else {
-                tempCoinImageSources.push(SUPPORTED_COIN_IMAGES[SUPPORTED_COINS.indexOf(ticker)]);
-                console.log("The coin is supported; image url: " + SUPPORTED_COIN_IMAGES[SUPPORTED_COINS.indexOf(ticker)]);    
-            }
+                }            } else {
+                tempCoinImageSources.push(SUPPORTED_COIN_IMAGES[SUPPORTED_COINS.indexOf(ticker)]);            }
             if(index === currentCoinIndex){
                 coin1ImageURL.current = tempCoinImageSources[index];
             }
@@ -149,33 +128,16 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
 
     function initialize(){
 
-        //First make sure there are enough supplied custom coin images to 
-        console.log("starting loop for adding coinImage");
-        resetImageSources();
+        //First make sure there are enough supplied custom coin images to        resetImageSources();
 
-        coin1Element = document.getElementById("coin1") as HTMLImageElement;
-        console.log("coin1Element: " + coin1Element);
-        coin2Element = document.getElementById("coin2") as HTMLImageElement;
-        console.log("coin2Element: " + coin2Element);
-
-        qrElement = document.getElementById("qr") as HTMLImageElement;
-        console.log("qrElement: " + qrElement);
-    
-        coinsContainer = document.getElementById("coins-container") as HTMLDivElement;
-        console.log("coinsContainer: " + coinsContainer);
-        coinsContainer.style.width = (COIN_SIZE + COIN_SPACE).toString() + "em";
-        coinsContainer.style.transform = "translateX(" + INITIAL_COIN_CONTAINER_POSITION_X.toString() + "em)";
-    
-        console.log("spanky: init coin1ImageUrl: " + coinImageSources[currentCoinIndex]);
-        coin1ImageURL.current = tempCoinImageSources[currentCoinIndex];
-        console.log("initializing coin 1 image to: " + coinImageSources[currentCoinIndex]);
-        coin2ImageURL.current = tempCoinImageSources[currentCoinIndex + 1];
+        coin1Element = document.getElementById("coin1") as HTMLImageElement;        coin2Element = document.getElementById("coin2") as HTMLImageElement;
+        qrElement = document.getElementById("qr") as HTMLImageElement;    
+        coinsContainer = document.getElementById("coins-container") as HTMLDivElement;        coinsContainer.style.width = (COIN_SIZE + COIN_SPACE).toString() + "em";
+        coinsContainer.style.transform = "translateX(" + INITIAL_COIN_CONTAINER_POSITION_X.toString() + "em)";        coin1ImageURL.current = tempCoinImageSources[currentCoinIndex];        coin2ImageURL.current = tempCoinImageSources[currentCoinIndex + 1];
 
         document.documentElement.style.setProperty("--coin-2-opacity", "0.0");
         document.documentElement.style.setProperty("--coin-1-opacity", "1.0");
-        document.documentElement.style.setProperty("--coins-container-left-position", (17.0 / 2.0 - COIN_SIZE - COIN_SPACE / 2.0).toString());
-        console.log("spanky: qr imageurl: " + qrImageSources[0]);
-        setcurrentCoinIndex(0);
+        document.documentElement.style.setProperty("--coins-container-left-position", (17.0 / 2.0 - COIN_SIZE - COIN_SPACE / 2.0).toString());        setcurrentCoinIndex(0);
     }
 
     useEffect(() => {
@@ -216,9 +178,7 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
 
             document.documentElement.style.setProperty("--coin-1-opacity", progress1.toString());
             document.documentElement.style.setProperty("--coin-2-opacity", progress2.toString());
-            if(progressPercentage >= 1.0){
-                console.log("Clearing interval");
-                clearInterval(interval);
+            if(progressPercentage >= 1.0){                clearInterval(interval);
                 document.documentElement.style.setProperty("--coin-1-opacity", isShiftingLeft ? "0.0" : "1.0");
                 document.documentElement.style.setProperty("--coin-2-opacity", isShiftingLeft ? "1.0" : "0.0");
                 if(isShiftingLeft){
@@ -233,13 +193,9 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
     }, [currentCoinShift, isShiftingLeft])
     
     function toggleAddressDisplay(){
-        if(addressDisplayIsVisible){
-            console.log("add: Making adress section invisible");
-            setAddressDisplayIsVisible(false);
+        if(addressDisplayIsVisible){            setAddressDisplayIsVisible(false);
         } else {
-            setAddressDisplayIsVisible(true);
-            console.log("add: Making adress section visible");
-        }
+            setAddressDisplayIsVisible(true);        }
     }
     
     const copyAddress = async () => {
@@ -257,10 +213,7 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
 
         setIsShiftingLeft(true);
         let oldCoinIndex = currentCoinIndex;
-        let newCoinIndex: number;
-
-        console.log("binky: coinImageSources.length: " + coinImageSources.length);
-        if(currentCoinIndex === coinImageSources.length-1){
+        let newCoinIndex: number;        if(currentCoinIndex === coinImageSources.length-1){
             setcurrentCoinIndex(0);
             newCoinIndex = 0;
         } else {
@@ -270,9 +223,7 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
 
         //First, reassign images
         coin1ImageURL.current = coinImageSources[oldCoinIndex];
-        coin2ImageURL.current = coinImageSources[newCoinIndex];
-        console.log("coinImageSources: " + JSON.stringify(coinImageSources));
-        //set initial transparencies
+        coin2ImageURL.current = coinImageSources[newCoinIndex];        //set initial transparencies
         document.documentElement.style.setProperty("--coin-1-opacity", "1");
         document.documentElement.style.setProperty("--coin-2-opacity", "0");
         //Shift all the coins left one coin
@@ -282,11 +233,7 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
         coinsContainer.style.transform = "translateX( " + (INITIAL_COIN_CONTAINER_POSITION_X).toString() + "em";
         interval = setInterval(() => {
             setCurrentCoinShift(oldCoinShift => oldCoinShift - COINS_SHIFT_INTERVAL);
-        }, 10)
-    
-        console.log("currentCoinIndex: " + currentCoinIndex);
-        console.log("oldCoinIndex: " + oldCoinIndex);
-    
+        }, 10)    
         resetAddressAndQr();
         
     }
@@ -321,22 +268,13 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
         coinsContainer.style.transform = "translateX( " + (newCoinShift + INITIAL_COIN_CONTAINER_POSITION_X).toString() + "em";
         interval = setInterval(() => {
             setCurrentCoinShift(oldCoinShift => oldCoinShift + COINS_SHIFT_INTERVAL);
-        },10)
-        console.log("currentCoinIndex: " + currentCoinIndex);
-        console.log("oldCoinIndex: " + oldCoinIndex);
-        resetAddressAndQr();
+        },10)        resetAddressAndQr();
     }
     
     function resetAddressAndQr(){
         document.documentElement.style.setProperty("value", props.addresses[currentCoinIndex]);
     }
-
-    console.log("redrawing");
-
     const addressDisplayClassName = addressDisplayIsVisible ? "" : "address-hidden";
-
-    console.log("spanky: render coin1image: " + coin1ImageURL);
-
     let rightArrowClassName = "right-arrow change-coin-arrow";
     let leftArrowClassName = "left-arrow change-coin-arrow";
 
@@ -344,10 +282,6 @@ export default function CrytoDonationWidget(props: CryptoDonationWidgetProps){
         rightArrowClassName += " disabled";
         leftArrowClassName += " disabled";
     }
-
-    console.log("coin image urls: " + coin1ImageURL + "; " + coin2ImageURL.current);
-    console.log("testVar: " + testVar);
-
     let widgetJSX = (
         <div className="donate-crypto-widget">
             <div className="coin-chooser">

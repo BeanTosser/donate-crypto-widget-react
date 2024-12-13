@@ -18,37 +18,6 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const SUPPORTED_COIN_IMAGES = [_bitcoinBtcLogo.default, _moneroXmrLogo.default, _usdCoinUsdcLogo.default, _dogecoinDogeLogo.default, _ethereumEthLogo.default];
-/* The original HTML
-
-<html>
-    <head>
-        <link rel="stylesheet" href="./css/donationWidget.css" />
-        <script type="text/javascript" src="./donationWidget.js"></script>
-    </head>
-    <body onload="initialize()">
-        <div class="test-thing">
-            &nbsp;
-        </div>
-        <div class="donate-crypto-widget">
-            <div class="coin-chooser">
-                <div class="left-arrow change-coin-arrow" onclick="clickLeft()"></div>
-                <div class="arrow-divider"></div>
-                <div id="coins-container">
-                    <img class="coin-logo" alt="coin 1" onclick="toggleAddressDisplay()"/>
-                    <img class="coin-logo" alt="coin 2" onclick="toggleAddressDisplay()"/>
-                </div>
-                <div class="right-arrow change-coin-arrow" onclick="clickRight()"></div>
-            </div>
-            <div id="address-display" class="hidden">
-                <input type="text" id="address-text" class="address-display" onclick = "copyAddress()" readonly />
-                <img alt="qr" id="qr" class="address-display"/>
-            </div>
-        </div>
-    </body>
-</html>
-
-*/
-
 let qrImageSources = [];
 let coinImageSources = [];
 let coinsContainer;
